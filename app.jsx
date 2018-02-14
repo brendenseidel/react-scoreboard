@@ -1,17 +1,21 @@
 var PLAYERS = [
   {
+    id: 1,
     name: "Paul McCartney",
     score: 432
   },
   {
+    id: 2,
     name: "John Lennon",
     score: 654
   },
   {
+    id: 3,
     name: "Ringo Starr",
     score: 234
   },
   {
+    id: 4,
     name: "George Harrison",
     score: 876
   },
@@ -87,7 +91,7 @@ function Application(props){
       <Header title={props.title}/>
       <div className="players">
         {props.players.map(function(player) {
-          return <Player name={player.name} score={player.score}/>
+          return <Player key={player.id} name={player.name} score={player.score}/>
         })}
       </div>
     </div>
