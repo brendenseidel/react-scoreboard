@@ -2,18 +2,22 @@ var PLAYERS = [
   {
     id: 1,
     name: "Paul McCartney",
+    score: 10,
   },
   {
     id: 2,
     name: "John Lennon",
+    score: 10,
   },
   {
     id: 3,
     name: "Ringo Starr",
+    score: 10,
   },
   {
     id: 4,
     name: "George Harrison",
+    score: 10,
   },
 ]
 
@@ -46,7 +50,7 @@ function Player(props) {
         {props.name}
       </div>
       <div className="player-score">
-        <Counter />
+        <Counter initialScore={props.score}/>
       </div>
     </div>
   );
@@ -54,6 +58,7 @@ function Player(props) {
 
 Player.propTypes = {
   name: React.PropTypes.string.isRequired,
+  score: React.PropTypes.number.isRequired,
 }
 
 
@@ -62,21 +67,33 @@ Player.propTypes = {
 // *********************
 
 var Counter = React.createClass({
-  propTypes: {},
-  render: function(){
-    return (
-      <div className="counter">
-        <button className="counter-action decrement"> - </button>
-        <div className="counter-score">{this.state.score}</div>
-        <button className="counter-action increment"> + </button>
-      </div>    
-    )
+  propTypes: {
+    initialScore: React.PropTypes.number.isRequired,
   },
   getInitialState: function(){
     return {
-      score: 0,
+      score: this.props.initialScore,
     }
-  }
+  },
+  incrementScore: function() {
+    this.setState({
+      score: (this.state.score + 1),
+    });
+  },
+  decrementScore: function() {
+    this.setState({
+      score: (this.state.score - 1),
+    });
+  },
+  render: function(){
+    return (
+      <div className="counter">
+        <button className="counter-action decrement" onClick={this.decrementScore}> - </button>
+        <div className="counter-score">{this.state.score}</div>
+        <button className="counter-action increment" onClick={this.incrementScore}> + </button>
+      </div>    
+    )
+  },
 });
 
 
@@ -90,7 +107,7 @@ function Application(props){
       <Header title={props.title}/>
       <div className="players">
         {props.players.map(function(player) {
-          return <Player key={player.id} name={player.name}/>
+          return <Player key={player.id} name={player.name} score={player.score}/>
         })}
       </div>
     </div>
@@ -101,6 +118,7 @@ Application.propTypes = {
   title: React.PropTypes.string,
   players: React.PropTypes.arrayOf(React.PropTypes.shape({
     name: React.PropTypes.string.isRequired,
+    score: React.PropTypes.number.isRequired,
   })).isRequired
 }
 
