@@ -1,3 +1,22 @@
+var PLAYERS = [
+  {
+    name: "Paul McCartney",
+    score: 432
+  },
+  {
+    name: "John Lennon",
+    score: 654
+  },
+  {
+    name: "Ringo Starr",
+    score: 234
+  },
+  {
+    name: "George Harrison",
+    score: 876
+  },
+]
+
 
 // *********************
 //    Header
